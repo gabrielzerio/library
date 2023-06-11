@@ -12,13 +12,10 @@ li {
     list-style: none;
 }
 
-* {
-    color: white;
-}
-
 body {
     min-height: 100vh;
     background: #277bb9;
+    color: white;
     /* background: -moz-linear-gradient(to bottom, #2e3192 1%, #1bffff 100%);
     background: -webkit-linear-gradient(to bottom, #2e3192 1%, #1bffff 100%);
     background: linear-gradient(to bottom, #2e3192 1%, #1bffff 100%); */
@@ -32,7 +29,7 @@ body {
 }
 
 .card {
-    
+
     min-height: 200px;
     background-color: #2873B5;
     border-radius: 8px;
@@ -41,7 +38,10 @@ body {
 
 .add-box,
 .icon,
-.bottom-content, .menu li {
+.bottom-content,
+.menu li,
+.popup,
+header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -68,11 +68,13 @@ body {
     font-weight: 500;
     margin-top: 20px;
 }
-.cards .card{
+
+.cards .card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+
 .card p {
     font-size: 16px;
     font-weight: 500;
@@ -89,8 +91,9 @@ body {
     cursor: pointer;
 
 }
+
 .settings {
-    
+
     position: relative;
 }
 
@@ -101,15 +104,17 @@ body {
     bottom: 0;
     right: -5px;
     border-radius: 4px;
-    box-shadow: 0 0 6px rgba(0,0,0,0.15);
-        /* ANIMATIONS  */
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
+    /* ANIMATIONS  */
     transform: scale(0);
     transform-origin: bottom right;
-    transition: transform 0.2s ease ;
+    transition: transform 0.2s ease;
 }
-.settings:hover .menu{
+
+.settings:hover .menu {
     transform: scale(1);
 }
+
 .settings .menu li {
     justify-content: flex-start;
     height: 30px;
@@ -118,10 +123,12 @@ body {
     padding: 17px 15px;
     border-radius: 0;
 }
-.menu li:hover{
+
+.menu li:hover {
     background-color: #2968af;
 }
-.menu li i{
+
+.menu li i {
     padding-right: 8px;
 }
 
