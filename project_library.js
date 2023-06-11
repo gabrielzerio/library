@@ -1,8 +1,30 @@
-const inputTitle = document.querySelector("#title");
-const inputAuthor = document.querySelector("#author");
-const inputPages = document.querySelector("#pages");
-const btn_add = document.querySelector(".btn-add");
-const cards = document.querySelector('.cards');
+const addBox = document.querySelector(".add-box"),
+popupBox = document.querySelector('.popup-box'),
+closeIcon = popupBox.querySelector('header i'),
+addBtn = popupBox.querySelector("button"),
+titleText = popupBox.querySelector("#title-book"),
+authorText = popupBox.querySelector("#author-book"),
+pagesText = popupBox.querySelector("#page-book"),
+statusText = popupBox.querySelector("#read-status");
+
+
+
+addBox.addEventListener('click', ()=>{
+    popupBox.classList.add('show');
+})
+
+closeIcon.addEventListener("click", () =>{
+    popupBox.classList.remove("show");
+})
+
+addBtn.addEventListener("click", (e) =>{
+    e.preventDefault();
+    let bookTitle = titleText.value,
+    bookAuthor = authorText.value,
+    bookPages = pagesText.value,
+    bookStatus = statusText.checked;
+     
+});
 
 
 let myLibrary = [];
@@ -18,55 +40,3 @@ function addBookToLibrary(title, author, pages) {
     myLibrary.push(b);
     showBooks();
 }
-
-function showBooks(){
-    cards.innerText = '';
-    let i=0;
-    myLibrary.forEach(element => {
-        let card = document.createElement('div');
-        card.className = 'card';
-        card.setAttribute('data-index',i);
-
-        let p = document.createElement('p');
-        p.textContent = element.title;
-
-        let p1 = document.createElement('p');
-        p1.textContent = element.author;
-
-        let p2 = document.createElement('p');
-        p2.textContent = element.pages;
-
-        card.appendChild(p);
-        card.appendChild(p1);
-        card.appendChild(p2);
-
-        const btnDel = document.createElement('button');
-        btnDel.className = 'delete';
-        btnDel.textContent = 'Remove';
-        btnDel.addEventListener('click', (e) => {
-            removeCard(e);
-        });
-        
-        card.appendChild(btnDel);
-        cards.appendChild(card); 
-        i++;
-    }); 
-}
-
-
-function removeCard(e) {
-    let index = e.target.parentNode.dataset.index;
-    myLibrary.splice(index,1);
-    showBooks();    
-}
-
-btn_add.addEventListener('click', (e) => {
-    e.preventDefault();
-    if (inputTitle.value == '' || inputAuthor.value == '' || inputPages.value == '') {
-        alert('Algum dos campos está vazio!');
-        return;
-    }
-    addBookToLibrary(title.value, author.value, pages.value);
-}, false);
-
-
