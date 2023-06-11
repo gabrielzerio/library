@@ -25,6 +25,12 @@
 .popup-box, .popup-box .popup{
     opacity: 0;
     pointer-events: none;
+        /* animation */
+    transition: all 250ms ease;
+}
+.popup-box.show, .popup-box .popup{
+    opacity: 1;
+    pointer-events: auto;
 }
 .popup .content {
     /* STYLE */
