@@ -1,0 +1,139 @@
+/* Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+li {
+    list-style: none;
+}
+
+* {
+    color: white;
+}
+
+body {
+    min-height: 100vh;
+    background: #277bb9;
+    /* background: -moz-linear-gradient(to bottom, #2e3192 1%, #1bffff 100%);
+    background: -webkit-linear-gradient(to bottom, #2e3192 1%, #1bffff 100%);
+    background: linear-gradient(to bottom, #2e3192 1%, #1bffff 100%); */
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    padding: 10px;
+    gap: 20px;
+}
+
+.card {
+    
+    min-height: 200px;
+    background-color: #2873B5;
+    border-radius: 8px;
+    padding: 15px 20px 20px;
+}
+
+.add-box,
+.icon,
+.bottom-content, .menu li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.add-box {
+    cursor: pointer;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.add-box .icon {
+    height: 78px;
+    width: 78px;
+    color: #88ABFF;
+    font-size: 40px;
+    border-radius: 50%;
+    justify-content: center;
+    border: 2px dashed #88ABFF;
+}
+
+.add-box p {
+    color: #88ABFF;
+    font-weight: 500;
+    margin-top: 20px;
+}
+.cards .card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.card p {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.card .bottom-content {
+    padding: 1 0px;
+    border-top: 1px solid black;
+}
+
+.bottom-content .settings i {
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+
+}
+.settings {
+    
+    position: relative;
+}
+
+.settings .menu {
+    padding: 5px 0;
+    background-color: rgba(39, 123, 185, 1);
+    position: absolute;
+    bottom: 0;
+    right: -5px;
+    border-radius: 4px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.15);
+        /* ANIMATIONS  */
+    transform: scale(0);
+    transform-origin: bottom right;
+    transition: transform 0.2s ease ;
+}
+.settings:hover .menu{
+    transform: scale(1);
+}
+.settings .menu li {
+    justify-content: flex-start;
+    height: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 17px 15px;
+    border-radius: 0;
+}
+.menu li:hover{
+    background-color: #2968af;
+}
+.menu li i{
+    padding-right: 8px;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+@media screen and (width < 800px) {
+    form {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+}
