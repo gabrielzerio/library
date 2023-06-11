@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stylePopUp.css">
     <title>Books</title>
 </head>
 
@@ -20,13 +21,22 @@
                 </header>
                 <form action="#">
                     <div class="row title">
-                        <label for="title">Add a new book!</label>
-                        <input type="text" id="title" name="title">
-                        <label for="title">Add a new book!</label>
-                        <input type="text" id="title" name="title">
-                        <label for="title">Add a new book!</label>
-                        <input type="text" id="title" name="title">
+                        <label for="">Title</label>
+                        <input type="text" required>
                     </div>
+                    <div class="row author">
+                        <label for="">Author</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="row pages">
+                        <label for="">Pages(Qty)</label>
+                        <input type="number" min="0" required>
+                    </div>
+                    <div class="row check">
+                        <label for="status">Read?</label>
+                        <input type="checkbox" id="status">
+                    </div>
+                    <button>Add Book</button>
                 </form>
             </div>
         </div>
@@ -40,9 +50,13 @@
         </li>
         <li class="card">
             <div class="details">
-                <p>Book1: LORD OF THE RINGS</p>
-                <p>Author J.J.R TOLKIEN</p>
+                <p>Book: LORD OF THE RINGS</p>
+                <p>Author J.R.R TOLKIEN</p>
                 <p>Pages: 250</p>
+                <div>
+                    <input type="checkbox" id="status_book">
+                    <label for="status_book">Read?</label>
+                </div>
             </div>
             <div class="bottom-content">
                 <p></p>
@@ -55,6 +69,7 @@
                 </div>
             </div>
         </li>
+        
     </div>
 </body>
 <script src="project_library.js"></script>
