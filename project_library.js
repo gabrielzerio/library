@@ -35,10 +35,10 @@ function showBooks(){
                 <div class="bottom-content">
                     <p></p>
                     <div class="settings">
-                        <i class="uil uil-ellipsis-h"></i>
+                        <i onclick="showMenu(this)" class="uil uil-ellipsis-h"></i>
                         <ul class="menu">
                             <li><i class="uil uil-pen"></i>Edit</li>
-                            <li><i class="uil uil-trash"></i>Delete</li>
+                            <li onclick="deleteBook(${index})" ><i class="uil uil-trash"></i>Delete</li>
                         </ul>
                     </div>
                 </div>
@@ -58,6 +58,21 @@ function addBookToLibrary() {
         myLibrary.push(book);
         localStorage.setItem("books", JSON.stringify(myLibrary));
     }
+}
+
+function deleteBook(bookIndex){
+    myLibrary.splice(bookIndex,1);
+    localStorage.setItem("books", JSON.stringify(myLibrary));
+    showBooks();
+}
+
+function showMenu(element){
+    element.parentElement.classList.add('show');
+    document.addEventListener('click', e =>{
+        if(e.target.tagName != "I" || e.target != element){
+            element.parentElement.classList.remove('show');
+        }
+    })
 }
 
 function cleanTexts(){
