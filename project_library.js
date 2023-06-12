@@ -7,7 +7,7 @@ const addBox = document.querySelector(".add-box"),
     authorText = popupBox.querySelector("#author-book"),
     pagesText = popupBox.querySelector("#page-book"),
     statusText = popupBox.querySelector("#read-status");
-
+let indexArray;
 
 let myLibrary = JSON.parse(localStorage.getItem("books") || "[]");
 function Book(title, author, pages, readStatus) {
@@ -47,15 +47,25 @@ function showBooks() {
 }
 showBooks(); //when DOM loads, it loads all books
 
-function addBookToLibrary() {
+function addBookToLibrary(option) {
     let bookTitle = titleText.value,
         bookAuthor = authorText.value,
         bookPages = pagesText.value,
         bookStatus = statusText.checked;
-    if (bookTitle && bookAuthor && bookPages) {
-        let book = new Book(bookTitle, bookAuthor, bookPages, bookStatus);
-        myLibrary.push(book);
-        localStorage.setItem("books", JSON.stringify(myLibrary));
+    if (option == 'new') {
+        if (bookTitle && bookAuthor && bookPages) {
+            let book = new Book(bookTitle, bookAuthor, bookPages, bookStatus);
+            myLibrary.push(book);
+            localStorage.setItem("books", JSON.stringify(myLibrary));
+        }
+    }else {
+        if (bookTitle && bookAuthor && bookPages) {
+            myLibrary[indexArray].title = titleText.value;
+            myLibrary[indexArray].author = authorText.value;
+            myLibrary[indexArray].pages = pagesText.value;
+            myLibrary[indexArray].readStatus = statusText.checked;
+            localStorage.setItem("books", JSON.stringify(myLibrary));
+        } 
     }
 }
 
@@ -67,12 +77,13 @@ function deleteBook(bookIndex) {
 
 function editBook(index, title, author, pages, status) {
     addBox.click();
-    console.log(index, title, author, pages, status);
+    indexArray = index;
+    //console.log(index, title, author, pages, status);
     titleText.value = title;
     authorText.value = author;
     pagesText.value = pages;
     statusText.checked = status;
-    addBtn.innerText="Update Book";
+    addBtn.innerText = "Update Book";
     popupTitle.innerText = "Edit the Book";
 }
 
@@ -84,12 +95,16 @@ function showMenu(element) {
         }
     })
 }
-
 function cleanTexts() {
     titleText.value = '';
     authorText.value = '';
     pagesText.value = '';
     statusText.checked = false;
+}
+function insertBook(option){
+    addBookToLibrary(option);
+    showBooks();
+    closeIcon.click();
 }
 //////////////////// - EVENT LISTENERS - ///////////
 
@@ -105,9 +120,11 @@ closeIcon.addEventListener("click", () => {
     cleanTexts();
 })
 
-addBtn.addEventListener("click", (e) => {
+addBtn.addEventListener("click", (e)=>{
     e.preventDefault();
-    addBookToLibrary();
-    showBooks();
-    closeIcon.click();
+    let option = 'new';
+    if(popupTitle.textContent.includes('Edit')){
+        option = 'edit'
+    }
+    insertBook(option);
 });
