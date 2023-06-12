@@ -1,5 +1,6 @@
 const addBox = document.querySelector(".add-box"),
     popupBox = document.querySelector('.popup-box'),
+    popupTitle = popupBox.querySelector(".content header p"),
     closeIcon = popupBox.querySelector('header i'),
     addBtn = popupBox.querySelector("button"),
     titleText = popupBox.querySelector("#title-book"),
@@ -17,33 +18,31 @@ function Book(title, author, pages, readStatus) {
 }
 
 
-function showBooks(){
+function showBooks() {
     document.querySelectorAll(".card").forEach(card => card.remove());
     myLibrary.forEach((book, index) => {
-        let status = (book.readStatus==true)?'checked':'';
-        
-                let tag = `<li class="card">
+        let status = (book.readStatus == true) ? 'read' : '';
+        let statusP = (book.readStatus == true) ? 'READ' : 'NOT<br>READ';
+
+        let tag = `<li class="card">
                 <div class="details">
                     <p>Book: ${book.title}</p>
                     <p>Author ${book.author}</p>
                     <p>Pages: ${book.pages}</p>
-                    <div>
-                        <input type="checkbox" id="status_book"  ${status}>
-                        <label for="">Read?</label>
-                    </div>
+                    <p class="book-status ${status}">${statusP}</p>
                 </div>
                 <div class="bottom-content">
                     <p></p>
                     <div class="settings">
                         <i onclick="showMenu(this)" class="uil uil-ellipsis-h"></i>
                         <ul class="menu">
-                            <li><i class="uil uil-pen"></i>Edit</li>
+                            <li onclick="editBook(${index}, '${book.title}', '${book.author}', '${book.pages}', ${book.readStatus})" ><i class="uil uil-pen"></i>Edit</li>
                             <li onclick="deleteBook(${index})" ><i class="uil uil-trash"></i>Delete</li>
                         </ul>
                     </div>
                 </div>
             </li>`;
-            addBox.insertAdjacentHTML("afterend", tag);
+        addBox.insertAdjacentHTML("afterend", tag);
     });
 }
 showBooks(); //when DOM loads, it loads all books
@@ -60,22 +59,33 @@ function addBookToLibrary() {
     }
 }
 
-function deleteBook(bookIndex){
-    myLibrary.splice(bookIndex,1);
+function deleteBook(bookIndex) {
+    myLibrary.splice(bookIndex, 1);
     localStorage.setItem("books", JSON.stringify(myLibrary));
     showBooks();
 }
 
-function showMenu(element){
+function editBook(index, title, author, pages, status) {
+    addBox.click();
+    console.log(index, title, author, pages, status);
+    titleText.value = title;
+    authorText.value = author;
+    pagesText.value = pages;
+    statusText.checked = status;
+    addBtn.innerText="Update Book";
+    popupTitle.innerText = "Edit the Book";
+}
+
+function showMenu(element) {
     element.parentElement.classList.add('show');
-    document.addEventListener('click', e =>{
-        if(e.target.tagName != "I" || e.target != element){
+    document.addEventListener('click', e => {
+        if (e.target.tagName != "I" || e.target != element) {
             element.parentElement.classList.remove('show');
         }
     })
 }
 
-function cleanTexts(){
+function cleanTexts() {
     titleText.value = '';
     authorText.value = '';
     pagesText.value = '';
@@ -84,11 +94,14 @@ function cleanTexts(){
 //////////////////// - EVENT LISTENERS - ///////////
 
 addBox.addEventListener('click', () => {
+    titleText.focus();
     popupBox.classList.add('show');
 })
 
 closeIcon.addEventListener("click", () => {
     popupBox.classList.remove("show");
+    popupTitle.innerText = 'Add a new Book';
+    addBtn.innerText = 'Add Book';
     cleanTexts();
 })
 

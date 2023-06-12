@@ -73,13 +73,25 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
 }
 
 .card p {
     font-size: 16px;
     font-weight: 500;
 }
-
+.card .book-status{   
+    padding: 10px 20px 10px 20px;
+    background-color: #ec2300;
+    /* POSITION */
+    position:absolute;
+    border-radius: 5px;
+    right: 15px;
+    bottom: 70px;
+}
+.card .book-status.read{
+    background-color: green;
+}
 .card .bottom-content {
     padding: 1 0px;
     border-top: 1px solid black;
@@ -93,7 +105,6 @@ header {
 }
 
 .settings {
-
     position: relative;
 }
 
