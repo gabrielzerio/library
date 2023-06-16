@@ -7,7 +7,18 @@ const addBox = document.querySelector(".add-box"),
     authorText = popupBox.querySelector("#author-book"),
     pagesText = popupBox.querySelector("#page-book"),
     statusText = popupBox.querySelector("#read-status");
-let indexArray;
+
+
+const indexA = () => {
+    let indexArray;
+    const setIndexArray = (x) => {
+        indexArray = x;
+    }
+    const getIndexArray = () => indexArray;
+    return { setIndexArray, getIndexArray };
+}
+
+const indexArray = indexA(); 
 
 let myLibrary = JSON.parse(localStorage.getItem("books") || "[]");
 function Book(title, author, pages, readStatus) {
@@ -58,14 +69,14 @@ function addBookToLibrary(option) {
             myLibrary.push(book);
             localStorage.setItem("books", JSON.stringify(myLibrary));
         }
-    }else {
+    } else {
         if (bookTitle && bookAuthor && bookPages) {
-            myLibrary[indexArray].title = titleText.value;
-            myLibrary[indexArray].author = authorText.value;
-            myLibrary[indexArray].pages = pagesText.value;
-            myLibrary[indexArray].readStatus = statusText.checked;
+            myLibrary[indexArray.getIndexArray()].title = titleText.value;
+            myLibrary[indexArray.getIndexArray()].author = authorText.value;
+            myLibrary[indexArray.getIndexArray()].pages = pagesText.value;
+            myLibrary[indexArray.getIndexArray()].readStatus = statusText.checked;
             localStorage.setItem("books", JSON.stringify(myLibrary));
-        } 
+        }
     }
 }
 
@@ -77,7 +88,7 @@ function deleteBook(bookIndex) {
 
 function editBook(index, title, author, pages, status) {
     addBox.click();
-    indexArray = index;
+    indexArray.setIndexArray(index);
     //console.log(index, title, author, pages, status);
     titleText.value = title;
     authorText.value = author;
@@ -101,7 +112,7 @@ function cleanTexts() {
     pagesText.value = '';
     statusText.checked = false;
 }
-function insertBook(option){
+function insertBook(option) {
     addBookToLibrary(option);
     showBooks();
     closeIcon.click();
@@ -120,10 +131,10 @@ closeIcon.addEventListener("click", () => {
     cleanTexts();
 })
 
-addBtn.addEventListener("click", (e)=>{
+addBtn.addEventListener("click", (e) => {
     e.preventDefault();
     let option = 'new';
-    if(popupTitle.textContent.includes('Edit')){
+    if (popupTitle.textContent.includes('Edit')) {
         option = 'edit'
     }
     insertBook(option);
